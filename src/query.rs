@@ -343,6 +343,8 @@ impl WMIConnection {
         debug!("Built query");
 
         debug!("Running query");
+        std::thread::sleep(std::time::Duration::from_millis(5));
+
         let res = self.raw_query(query_text);
         debug!("Ran query");
         debug!(".");
