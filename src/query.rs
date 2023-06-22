@@ -12,6 +12,7 @@ use windows::core::BSTR;
 use windows::Win32::System::Wmi::{
     WBEM_FLAG_FORWARD_ONLY, WBEM_FLAG_RETURN_IMMEDIATELY, WBEM_FLAG_RETURN_WBEM_COMPLETE,
 };
+use slog_scope::debug;
 
 #[non_exhaustive]
 pub enum FilterValue {
@@ -337,9 +338,15 @@ impl WMIConnection {
     where
         T: de::DeserializeOwned,
     {
+        debug!("Building query");
         let query_text = build_query::<T>(None)?;
+        debug!("Built query");
 
-        self.raw_query(query_text)
+        debug!("Running query");
+        let res = self.raw_query(query_text);
+        debug!("Ran query");
+        debug!(".");
+        res
     }
 
     /// Query all the objects of type T, while filtering according to `filters`.

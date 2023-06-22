@@ -41,6 +41,7 @@ serde = { version = "1.0", features = ["derive"] }
 futures = { version = "0.3" }
 thiserror = "^1"
 log = "0.4"
+slog-scope = "4.3.0"
 
 [dev-dependencies]
 async-std = { version = "1.10",  features = ["attributes"] }
